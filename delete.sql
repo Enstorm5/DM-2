@@ -185,15 +185,4 @@ END;
 /
 
 
--- Delete Library Memberships for Non-existent Students
-BEGIN
-    DELETE FROM Library_memberships
-    WHERE NOT EXISTS (
-        SELECT 1 
-        FROM Students 
-        WHERE Students.student_id = Library_memberships.student_id
-    );
 
-    DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT || ' library memberships deleted for non-existent students.');
-END;
-/
